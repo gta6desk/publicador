@@ -1,12 +1,16 @@
 name: publicar
 # Horas de Lisboa (= UTC de novembro a março; em horário de verão tirar 1 hora a cada cron).
 # O GitHub atrasa ou descarta agendamentos à hora certa (27/10 não correu). Por isso:
-# 13:07 publica; 13:22 2.ª tentativa (o registo impede repetir); 13:47 vigia: email se nada saiu.
+# Stories: 13:07 publica, 13:22 2.ª tentativa, 13:47 vigia. Posts: 19:07, 19:22, vigia 19:47.
+# O registo impede repetir; a vigia não publica, só dá erro (email) se o de hoje não saiu.
 on:
   schedule:
     - cron: "7 13 * * *"
     - cron: "22 13 * * *"
     - cron: "47 13 * * *"
+    - cron: "7 19 * * *"
+    - cron: "22 19 * * *"
+    - cron: "47 19 * * *"
   workflow_dispatch:
     inputs:
       simular:
@@ -42,7 +46,7 @@ jobs:
           IG_TOKEN: ${{ secrets.IG_TOKEN }}
           IG_USER_ID: ${{ secrets.IG_USER_ID }}
         run: |
-          if [ "${{ github.event.schedule }}" = "47 13 * * *" ]; then
+          if [ "${{ github.event.schedule }}" = "47 13 * * *" ] || [ "${{ github.event.schedule }}" = "47 19 * * *" ]; then
             python publicar.py --vigiar
           elif [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.verificar }}" = "true" ]; then
             python publicar.py --verificar

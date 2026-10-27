@@ -16,11 +16,41 @@
    "ficheiro": "stories/countdown/2026-10-28-22days.jpg"
   },
   {
+   "id": "2026-10-14-pc-2027",
+   "data": "2026-10-28",
+   "hora": "19:00",
+   "tipo": "carrossel",
+   "ficheiros": [
+    "posts/2026-10-14-pc-2027/01.jpg",
+    "posts/2026-10-14-pc-2027/02.jpg",
+    "posts/2026-10-14-pc-2027/03.jpg",
+    "posts/2026-10-14-pc-2027/04.jpg",
+    "posts/2026-10-14-pc-2027/05.jpg",
+    "posts/2026-10-14-pc-2027/06.jpg"
+   ],
+   "legenda": "Rumor: according to GamesBeat, Rockstar is planning a PC release of GTA VI between January and March 2027. The report rests on four industry sources who asked not to be named. Rockstar did not comment. Consoles get it first, on 19 November, on PS5 and Xbox Series X/S.\n\nSource: GamesBeat\nImages: Rockstar Games\n#GTA6 #GTAVI #PCGaming #RockstarGames"
+  },
+  {
    "id": "2026-10-29-21days",
    "data": "2026-10-29",
    "hora": "13:00",
    "tipo": "story",
    "ficheiro": "stories/countdown/2026-10-29-21days.jpg"
+  },
+  {
+   "id": "2026-10-14-discotecas",
+   "data": "2026-10-29",
+   "hora": "19:00",
+   "tipo": "carrossel",
+   "ficheiros": [
+    "posts/2026-10-14-discotecas/01.jpg",
+    "posts/2026-10-14-discotecas/02.jpg",
+    "posts/2026-10-14-discotecas/03.jpg",
+    "posts/2026-10-14-discotecas/04.jpg",
+    "posts/2026-10-14-discotecas/05.jpg",
+    "posts/2026-10-14-discotecas/06.jpg"
+   ],
+   "legenda": "Bloomberg: Rockstar's Aaron Garbut says every customer in GTA 6's nightclubs has their own animations and scripts, and the lights sync with the music. The team's research included police ride-alongs.\n\nSource: Bloomberg (read via GameSpot and GameDaily)\nImages: Rockstar Games\n#GTA6 #GTAVI #ViceCity"
   },
   {
    "id": "2026-10-30-20days",
@@ -30,11 +60,39 @@
    "ficheiro": "stories/countdown/2026-10-30-20days.jpg"
   },
   {
+   "id": "2026-10-14-fugas-garbut",
+   "data": "2026-10-30",
+   "hora": "19:00",
+   "tipo": "carrossel",
+   "ficheiros": [
+    "posts/2026-10-14-fugas-garbut/01.jpg",
+    "posts/2026-10-14-fugas-garbut/02.jpg",
+    "posts/2026-10-14-fugas-garbut/03.jpg",
+    "posts/2026-10-14-fugas-garbut/04.jpg",
+    "posts/2026-10-14-fugas-garbut/05.jpg"
+   ],
+   "legenda": "Rockstar's Aaron Garbut told Bloomberg the 2022 GTA 6 leaks were \"weirdly invasive\", like someone going through your dirty laundry. GTA 6 launches 19 November.\n\nSource: Bloomberg (read via GameSpot and Insider Gaming)\nImages: Rockstar Games\n#GTA6 #GTAVI #RockstarGames"
+  },
+  {
    "id": "2026-10-31-19days",
    "data": "2026-10-31",
    "hora": "13:00",
    "tipo": "story",
    "ficheiro": "stories/countdown/2026-10-31-19days.jpg"
+  },
+  {
+   "id": "2026-10-14-gta-v-ps-plus",
+   "data": "2026-10-31",
+   "hora": "19:00",
+   "tipo": "carrossel",
+   "ficheiros": [
+    "posts/2026-10-14-gta-v-ps-plus/01.jpg",
+    "posts/2026-10-14-gta-v-ps-plus/02.jpg",
+    "posts/2026-10-14-gta-v-ps-plus/03.jpg",
+    "posts/2026-10-14-gta-v-ps-plus/04.jpg",
+    "posts/2026-10-14-gta-v-ps-plus/05.jpg"
+   ],
+   "legenda": "Kotaku reports that Sony is telling PS Plus members GTA V leaves Extra and Premium on 17 November, two days before GTA 6. The message was shared on Reddit. After that, you need to buy the game to keep playing.\n\nSource: Kotaku, Notebookcheck, Rockstar Games\n#GTA6 #GTAV #PSPlus #PlayStation"
   },
   {
    "id": "2026-11-01-18days",
@@ -44,11 +102,41 @@
    "ficheiro": "stories/countdown/2026-11-01-18days.jpg"
   },
   {
+   "id": "2026-10-14-proximo-jogo-hooker",
+   "data": "2026-11-01",
+   "hora": "19:00",
+   "tipo": "carrossel",
+   "ficheiros": [
+    "posts/2026-10-14-proximo-jogo-hooker/01.jpg",
+    "posts/2026-10-14-proximo-jogo-hooker/02.jpg",
+    "posts/2026-10-14-proximo-jogo-hooker/03.jpg",
+    "posts/2026-10-14-proximo-jogo-hooker/04.jpg",
+    "posts/2026-10-14-proximo-jogo-hooker/05.jpg",
+    "posts/2026-10-14-proximo-jogo-hooker/06.jpg"
+   ],
+   "legenda": "Phil Hooker, who heads development at Rockstar, told Bloomberg that what the studio built for GTA 6, from its engine and tools to its team, should help it \"do things more quickly\" next time. GTA 6 took more than eight years, and no next game has been announced.\n\nSource: Bloomberg (read via GameSpot, The Shortcut and IBTimes UK)\nImages: Rockstar Games\n#GTA6 #GTAVI #RockstarGames"
+  },
+  {
    "id": "2026-11-02-17days",
    "data": "2026-11-02",
    "hora": "13:00",
    "tipo": "story",
    "ficheiro": "stories/countdown/2026-11-02-17days.jpg"
+  },
+  {
+   "id": "2026-10-19-classificacoes-idade",
+   "data": "2026-11-02",
+   "hora": "19:00",
+   "tipo": "carrossel",
+   "ficheiros": [
+    "posts/2026-10-19-classificacoes-idade/01.jpg",
+    "posts/2026-10-19-classificacoes-idade/02.jpg",
+    "posts/2026-10-19-classificacoes-idade/03.jpg",
+    "posts/2026-10-19-classificacoes-idade/04.jpg",
+    "posts/2026-10-19-classificacoes-idade/05.jpg",
+    "posts/2026-10-19-classificacoes-idade/06.jpg"
+   ],
+   "legenda": "Rumor: GTABoom reports GTA 6 is now rated 17+ or older in every major market. South Korea's rating board gave it 19+ on 16 October, per GamerSky, and Japan's rating is CERO Z, 18 and over, per hashout.jp. Store pages in Saudi Arabia and the UAE show 21+.\n\nSource: GTABoom, GamerSky, Inven Global, hashout.jp, ESRB, USK\nImages: Rockstar Games\n#GTA6 #GTAVI #RockstarGames"
   },
   {
    "id": "2026-11-03-16days",
@@ -58,11 +146,42 @@
    "ficheiro": "stories/countdown/2026-11-03-16days.jpg"
   },
   {
+   "id": "2026-10-20-daft-punk",
+   "data": "2026-11-03",
+   "hora": "19:00",
+   "tipo": "carrossel",
+   "ficheiros": [
+    "posts/2026-10-20-daft-punk/01.jpg",
+    "posts/2026-10-20-daft-punk/02.jpg",
+    "posts/2026-10-20-daft-punk/03.jpg",
+    "posts/2026-10-20-daft-punk/04.jpg",
+    "posts/2026-10-20-daft-punk/05.jpg",
+    "posts/2026-10-20-daft-punk/06.jpg",
+    "posts/2026-10-20-daft-punk/07.jpg"
+   ],
+   "legenda": "Rumor: the X account hasitleaked says Rockstar approached Daft Punk's management for a \"final comeback\" on GTA 6, with \"essentially an unlimited budget\", and that Justice were the \"second choice\". Neither Rockstar nor Daft Punk's representatives have confirmed it. Justice composed the game's original score.\n\nSource: hasitleaked on X (read via GTABoom and Dexerto), Kotaku\nImages: Rockstar Games\n#GTA6 #GTAVI #DaftPunk #Justice"
+  },
+  {
    "id": "2026-11-04-15days",
    "data": "2026-11-04",
    "hora": "13:00",
    "tipo": "story",
    "ficheiro": "stories/countdown/2026-11-04-15days.jpg"
+  },
+  {
+   "id": "2026-10-20-nem-a-rockstar-sabe",
+   "data": "2026-11-04",
+   "hora": "19:00",
+   "tipo": "carrossel",
+   "ficheiros": [
+    "posts/2026-10-20-nem-a-rockstar-sabe/01.jpg",
+    "posts/2026-10-20-nem-a-rockstar-sabe/02.jpg",
+    "posts/2026-10-20-nem-a-rockstar-sabe/03.jpg",
+    "posts/2026-10-20-nem-a-rockstar-sabe/04.jpg",
+    "posts/2026-10-20-nem-a-rockstar-sabe/05.jpg",
+    "posts/2026-10-20-nem-a-rockstar-sabe/06.jpg"
+   ],
+   "legenda": "In a new video, Bloomberg's Jason Schreier shared details that did not fit in his GTA 6 report. Rockstar art director Aaron Garbut: \"There's no one person that has this whole thing in their head.\" Some details, like Red Dead 2's weather-reactive horses, were one person's idea.\n\nSource: Jason Schreier on YouTube (read via GamesRadar and GTABoom)\nImages: Rockstar Games\n#GTA6 #GTAVI #Rockstar #RDR2"
   },
   {
    "id": "2026-11-05-14days",

@@ -1,6 +1,6 @@
 """Publicador da @gta6desk: publica no Instagram, pela API oficial, o que está em fila.json para hoje.
 
-Corre no GitHub Actions (13:07 e 13:22 de Lisboa; vigia às 13:47) ou à mão:
+Corre no GitHub Actions (stories 13:07/13:22, posts 19:07/19:22; vigias 13:47 e 19:47) ou à mão:
     python publicar.py --simular      # mostra o que faria, sem tocar no Instagram
     python publicar.py                # publica (precisa de IG_TOKEN)
     python publicar.py --vigiar       # não publica; falha (email) se o de hoje não saiu
@@ -76,25 +76,51 @@ def pedido(metodo, caminho, token, **params):
         raise ErroPublicar(f"Instagram respondeu {e.code} em {caminho.split('/')[-1]}: {corpo[:400]}")
 
 
-def publicar_story(item, token, user_id, dormir=time.sleep):
-    url = url_publico(item["ficheiro"])
-    c = pedido("POST", f"{user_id}/media", token, image_url=url, media_type="STORIES")
-    cid = c.get("id") or ""
-    if not cid:
-        raise ErroPublicar(f"Sem id do contentor: {c}")
+def esperar(cid, token, dormir):
+    """Espera que o Instagram processe um contentor (máx. 5 min)."""
     for _ in range(MAX_VERIFICACOES):
         s = pedido("GET", cid, token, fields="status_code").get("status_code")
         if s == "FINISHED":
-            break
+            return
         if s in ("ERROR", "EXPIRED"):
-            raise ErroPublicar(f"Instagram não aceitou a imagem ({s}): {url}")
+            raise ErroPublicar(f"Instagram não aceitou o contentor {cid} ({s}).")
         dormir(ESPERA_S)
-    else:
-        raise ErroPublicar("O Instagram demorou mais de 5 minutos a processar; parei sem publicar.")
+    raise ErroPublicar("O Instagram demorou mais de 5 minutos a processar; parei sem publicar.")
+
+
+def contentor(caminho, token, **params):
+    c = pedido("POST", caminho, token, **params)
+    if not c.get("id"):
+        raise ErroPublicar(f"Sem id do contentor: {c}")
+    return c["id"]
+
+
+def publicar_contentor(cid, token, user_id):
     p = pedido("POST", f"{user_id}/media_publish", token, creation_id=cid)
     if not p.get("id"):
         raise ErroPublicar(f"Publicação sem id: {p}")
     return p["id"]
+
+
+def publicar_story(item, token, user_id, dormir=time.sleep):
+    cid = contentor(f"{user_id}/media", token, image_url=url_publico(item["ficheiro"]), media_type="STORIES")
+    esperar(cid, token, dormir)
+    return publicar_contentor(cid, token, user_id)
+
+
+def publicar_carrossel(item, token, user_id, dormir=time.sleep):
+    """Post de várias imagens: um contentor por slide, depois o carrossel com a legenda."""
+    filhos = []
+    for f in item["ficheiros"]:
+        filhos.append(contentor(f"{user_id}/media", token, image_url=url_publico(f), is_carousel_item="true"))
+    for c in filhos:
+        esperar(c, token, dormir)
+    cid = contentor(f"{user_id}/media", token, media_type="CAROUSEL", children=",".join(filhos), caption=item["legenda"])
+    esperar(cid, token, dormir)
+    return publicar_contentor(cid, token, user_id)
+
+
+PUBLICADORES = {"story": publicar_story, "carrossel": publicar_carrossel}
 
 
 def registar(item, resultado, media_id="", caminho=None):
@@ -104,7 +130,8 @@ def registar(item, resultado, media_id="", caminho=None):
         w = csv.writer(f)
         if novo:
             w.writerow(["data_hora_lisboa", "id", "ficheiro", "resultado", "media_id"])
-        w.writerow([agora().strftime("%Y-%m-%d %H:%M"), item["id"], item["ficheiro"], resultado, media_id])
+        onde = item.get("ficheiro") or os.path.dirname(item["ficheiros"][0])
+        w.writerow([agora().strftime("%Y-%m-%d %H:%M"), item["id"], onde, resultado, media_id])
 
 
 def main(argv=None, momento=None, dormir=time.sleep):
@@ -142,7 +169,7 @@ def main(argv=None, momento=None, dormir=time.sleep):
         return 1
     if a.simular:
         for i in itens:
-            print(f"  [simulação] publicaria {i['tipo']} {i['id']} <- {url_publico(i['ficheiro'])}")
+            print(f"  [simulação] publicaria {i['tipo']} {i['id']} <- {url_publico(i.get('ficheiro') or i['ficheiros'][0])}")
         return 0
     token = os.environ.get("IG_TOKEN")
     if itens and not token:
@@ -152,11 +179,11 @@ def main(argv=None, momento=None, dormir=time.sleep):
         return 0
     user_id = os.environ.get("IG_USER_ID") or pedido("GET", "me", token, fields="user_id")["user_id"]
     for i in itens:
-        if i["tipo"] != "story":
+        if i["tipo"] not in PUBLICADORES:
             print(f"ERRO: tipo '{i['tipo']}' ainda não suportado ({i['id']}). Parei.")
             return 1
         try:
-            mid = publicar_story(i, token, user_id, dormir)
+            mid = PUBLICADORES[i["tipo"]](i, token, user_id, dormir)
         except ErroPublicar as e:
             print(f"ERRO em {i['id']}: {e}")
             return 1
