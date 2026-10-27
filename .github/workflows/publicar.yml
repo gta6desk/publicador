@@ -1,0 +1,49 @@
+name: publicar
+# Todos os dias às 13:00 de Lisboa. Lisboa = UTC de novembro a março; em horário de verão mudar para "0 12 * * *".
+# O GitHub pode atrasar o arranque alguns minutos (normal).
+on:
+  schedule:
+    - cron: "0 13 * * *"
+  workflow_dispatch:
+    inputs:
+      simular:
+        description: "Só simular (não publica)"
+        type: boolean
+        default: true
+
+permissions:
+  contents: write   # para guardar o registo.csv
+
+concurrency:
+  group: publicar
+  cancel-in-progress: false
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pytest pillow
+      - name: Testes (se falharem, não publica)
+        run: pytest -q
+      - name: Publicar
+        env:
+          IG_TOKEN: ${{ secrets.IG_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.simular }}" = "true" ]; then
+            python publicar.py --simular
+          else
+            python publicar.py
+          fi
+      - name: Guardar registo
+        if: always()
+        run: |
+          git config user.name "publicador-gta6desk"
+          git config user.email "actions@users.noreply.github.com"
+          git add registo.csv
+          git diff --cached --quiet || (git commit -m "registo: $(date -u +%F)" && git push)
