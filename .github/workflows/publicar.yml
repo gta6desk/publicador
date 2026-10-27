@@ -10,6 +10,10 @@ on:
         description: "Só simular (não publica)"
         type: boolean
         default: true
+      verificar:
+        description: "Só verificar a chave (não publica)"
+        type: boolean
+        default: false
 
 permissions:
   contents: write   # para guardar o registo.csv
@@ -35,7 +39,9 @@ jobs:
           IG_TOKEN: ${{ secrets.IG_TOKEN }}
           IG_USER_ID: ${{ secrets.IG_USER_ID }}
         run: |
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.simular }}" = "true" ]; then
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.verificar }}" = "true" ]; then
+            python publicar.py --verificar
+          elif [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.simular }}" = "true" ]; then
             python publicar.py --simular
           else
             python publicar.py
