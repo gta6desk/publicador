@@ -171,3 +171,13 @@ def test_verificar_le_a_conta_e_nao_publica(monkeypatch, tmp_path):
     assert P.main(["--verificar"], momento=m("2026-10-27")) == 0
     assert not (tmp_path / "r.csv").exists()
     assert not any(c[1].endswith("/media_publish") for c in f.chamadas)
+
+
+def test_vigia_da_erro_se_nao_saiu_e_nao_toca_na_rede(monkeypatch, tmp_path):
+    monkeypatch.setattr(P, "REGISTO", str(tmp_path / "r.csv"))
+    def proibido(*a, **k):
+        raise AssertionError("a vigia tentou usar a rede")
+    monkeypatch.setattr(P.urllib.request, "urlopen", proibido)
+    assert P.main(["--vigiar"], momento=m("2026-10-27", "13:47")) == 1
+    P.registar({"id": "2026-10-27-23days", "ficheiro": "x.jpg"}, "publicado", "1")
+    assert P.main(["--vigiar"], momento=m("2026-10-27", "13:47")) == 0

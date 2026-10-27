@@ -1,6 +1,6 @@
 # Publicador da @gta6desk
 
-Publica no Instagram, pela **API oficial**, o que está em `fila.json` para cada dia. Corre sozinho no GitHub Actions às **13:00 de Lisboa**. Não precisa do Mac ligado.
+Publica no Instagram, pela **API oficial**, o que está em `fila.json` para cada dia. Corre sozinho no GitHub Actions às **13:07 de Lisboa** (2.ª tentativa às 13:22; vigia às 13:47 manda email se nada saiu). Não precisa do Mac ligado.
 
 - `fila.json`: o que sai e quando (data, hora de Lisboa, ficheiro).
 - `stories/`: as imagens (JPEG 1080x1920). O repositório é público porque a API só aceita imagens num link público.

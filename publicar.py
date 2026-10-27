@@ -1,8 +1,9 @@
 """Publicador da @gta6desk: publica no Instagram, pela API oficial, o que está em fila.json para hoje.
 
-Corre no GitHub Actions (todos os dias às 13:00 de Lisboa) ou à mão:
+Corre no GitHub Actions (13:07 e 13:22 de Lisboa; vigia às 13:47) ou à mão:
     python publicar.py --simular      # mostra o que faria, sem tocar no Instagram
     python publicar.py                # publica (precisa de IG_TOKEN)
+    python publicar.py --vigiar       # não publica; falha (email) se o de hoje não saiu
 
 Regras fixas (código, não IA):
 - só publica itens com data de HOJE (Lisboa) e hora já passada; nunca dias passados nem futuros;
@@ -110,7 +111,15 @@ def main(argv=None, momento=None, dormir=time.sleep):
     ap = argparse.ArgumentParser()
     ap.add_argument("--simular", action="store_true", help="não toca no Instagram")
     ap.add_argument("--verificar", action="store_true", help="só confirma que a chave funciona (não publica)")
+    ap.add_argument("--vigiar", action="store_true", help="não publica; dá erro (email) se o de hoje não saiu")
     a = ap.parse_args(argv)
+    if a.vigiar:
+        falta = para_hoje(ler_fila(), ja_publicados(), momento or agora())
+        if falta:
+            print("ERRO: hoje ainda não saiu: " + ", ".join(i["id"] for i in falta) + ". Publica à mão ou corre o workflow.")
+            return 1
+        print("Vigia: tudo o que era para hoje já saiu.")
+        return 0
     if a.verificar:
         token = os.environ.get("IG_TOKEN")
         if not token:
