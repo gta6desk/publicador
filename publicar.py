@@ -109,7 +109,22 @@ def registar(item, resultado, media_id="", caminho=None):
 def main(argv=None, momento=None, dormir=time.sleep):
     ap = argparse.ArgumentParser()
     ap.add_argument("--simular", action="store_true", help="não toca no Instagram")
+    ap.add_argument("--verificar", action="store_true", help="só confirma que a chave funciona (não publica)")
     a = ap.parse_args(argv)
+    if a.verificar:
+        token = os.environ.get("IG_TOKEN")
+        if not token:
+            print("ERRO: falta o segredo IG_TOKEN.")
+            return 1
+        try:
+            eu = pedido("GET", "me", token, fields="user_id,username,account_type")
+            lim = pedido("GET", f"{eu['user_id']}/content_publishing_limit", token, fields="quota_usage,config")
+        except ErroPublicar as e:
+            print(f"ERRO: a chave não funciona: {e}")
+            return 1
+        print(f"Chave OK: @{eu.get('username')} ({eu.get('account_type')}), user_id {eu.get('user_id')}.")
+        print(f"Limite de publicações: {lim}")
+        return 0
     momento = momento or agora()
     itens = para_hoje(ler_fila(), ja_publicados(), momento)
     print(f"{momento:%Y-%m-%d %H:%M} Lisboa: {len(itens)} por publicar hoje.")
