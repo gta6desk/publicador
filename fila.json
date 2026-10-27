@@ -1,0 +1,173 @@
+{
+ "_nota": "Uma linha por publicação. hora = hora de Lisboa. Só o João ou o Hokage (com o João) mudam este ficheiro.",
+ "fila": [
+  {
+   "id": "2026-10-27-23days",
+   "data": "2026-10-27",
+   "hora": "13:00",
+   "tipo": "story",
+   "ficheiro": "stories/countdown/2026-10-27-23days.jpg"
+  },
+  {
+   "id": "2026-10-28-22days",
+   "data": "2026-10-28",
+   "hora": "13:00",
+   "tipo": "story",
+   "ficheiro": "stories/countdown/2026-10-28-22days.jpg"
+  },
+  {
+   "id": "2026-10-29-21days",
+   "data": "2026-10-29",
+   "hora": "13:00",
+   "tipo": "story",
+   "ficheiro": "stories/countdown/2026-10-29-21days.jpg"
+  },
+  {
+   "id": "2026-10-30-20days",
+   "data": "2026-10-30",
+   "hora": "13:00",
+   "tipo": "story",
+   "ficheiro": "stories/countdown/2026-10-30-20days.jpg"
+  },
+  {
+   "id": "2026-10-31-19days",
+   "data": "2026-10-31",
+   "hora": "13:00",
+   "tipo": "story",
+   "ficheiro": "stories/countdown/2026-10-31-19days.jpg"
+  },
+  {
+   "id": "2026-11-01-18days",
+   "data": "2026-11-01",
+   "hora": "13:00",
+   "tipo": "story",
+   "ficheiro": "stories/countdown/2026-11-01-18days.jpg"
+  },
+  {
+   "id": "2026-11-02-17days",
+   "data": "2026-11-02",
+   "hora": "13:00",
+   "tipo": "story",
+   "ficheiro": "stories/countdown/2026-11-02-17days.jpg"
+  },
+  {
+   "id": "2026-11-03-16days",
+   "data": "2026-11-03",
+   "hora": "13:00",
+   "tipo": "story",
+   "ficheiro": "stories/countdown/2026-11-03-16days.jpg"
+  },
+  {
+   "id": "2026-11-04-15days",
+   "data": "2026-11-04",
+   "hora": "13:00",
+   "tipo": "story",
+   "ficheiro": "stories/countdown/2026-11-04-15days.jpg"
+  },
+  {
+   "id": "2026-11-05-14days",
+   "data": "2026-11-05",
+   "hora": "13:00",
+   "tipo": "story",
+   "ficheiro": "stories/countdown/2026-11-05-14days.jpg"
+  },
+  {
+   "id": "2026-11-06-13days",
+   "data": "2026-11-06",
+   "hora": "13:00",
+   "tipo": "story",
+   "ficheiro": "stories/countdown/2026-11-06-13days.jpg"
+  },
+  {
+   "id": "2026-11-07-12days",
+   "data": "2026-11-07",
+   "hora": "13:00",
+   "tipo": "story",
+   "ficheiro": "stories/countdown/2026-11-07-12days.jpg"
+  },
+  {
+   "id": "2026-11-08-11days",
+   "data": "2026-11-08",
+   "hora": "13:00",
+   "tipo": "story",
+   "ficheiro": "stories/countdown/2026-11-08-11days.jpg"
+  },
+  {
+   "id": "2026-11-09-10days",
+   "data": "2026-11-09",
+   "hora": "13:00",
+   "tipo": "story",
+   "ficheiro": "stories/countdown/2026-11-09-10days.jpg"
+  },
+  {
+   "id": "2026-11-10-9days",
+   "data": "2026-11-10",
+   "hora": "13:00",
+   "tipo": "story",
+   "ficheiro": "stories/countdown/2026-11-10-9days.jpg"
+  },
+  {
+   "id": "2026-11-11-8days",
+   "data": "2026-11-11",
+   "hora": "13:00",
+   "tipo": "story",
+   "ficheiro": "stories/countdown/2026-11-11-8days.jpg"
+  },
+  {
+   "id": "2026-11-12-7days",
+   "data": "2026-11-12",
+   "hora": "13:00",
+   "tipo": "story",
+   "ficheiro": "stories/countdown/2026-11-12-7days.jpg"
+  },
+  {
+   "id": "2026-11-13-6days",
+   "data": "2026-11-13",
+   "hora": "13:00",
+   "tipo": "story",
+   "ficheiro": "stories/countdown/2026-11-13-6days.jpg"
+  },
+  {
+   "id": "2026-11-14-5days",
+   "data": "2026-11-14",
+   "hora": "13:00",
+   "tipo": "story",
+   "ficheiro": "stories/countdown/2026-11-14-5days.jpg"
+  },
+  {
+   "id": "2026-11-15-4days",
+   "data": "2026-11-15",
+   "hora": "13:00",
+   "tipo": "story",
+   "ficheiro": "stories/countdown/2026-11-15-4days.jpg"
+  },
+  {
+   "id": "2026-11-16-3days",
+   "data": "2026-11-16",
+   "hora": "13:00",
+   "tipo": "story",
+   "ficheiro": "stories/countdown/2026-11-16-3days.jpg"
+  },
+  {
+   "id": "2026-11-17-2days",
+   "data": "2026-11-17",
+   "hora": "13:00",
+   "tipo": "story",
+   "ficheiro": "stories/countdown/2026-11-17-2days.jpg"
+  },
+  {
+   "id": "2026-11-18-1day",
+   "data": "2026-11-18",
+   "hora": "13:00",
+   "tipo": "story",
+   "ficheiro": "stories/countdown/2026-11-18-1day.jpg"
+  },
+  {
+   "id": "2026-11-19-outnow",
+   "data": "2026-11-19",
+   "hora": "13:00",
+   "tipo": "story",
+   "ficheiro": "stories/countdown/2026-11-19-outnow.jpg"
+  }
+ ]
+}
