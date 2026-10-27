@@ -163,3 +163,11 @@ def test_chave_nunca_aparece_nos_erros(monkeypatch):
     with pytest.raises(P.ErroPublicar) as e:
         P.pedido("GET", "me", "tok123")
     assert "tok123" not in str(e.value)
+
+
+def test_verificar_le_a_conta_e_nao_publica(monkeypatch, tmp_path):
+    f = FalsoInstagram()
+    prep(monkeypatch, tmp_path, lambda m, c, tok, **p: {"user_id": "999", "username": "gta6desk", "account_type": "BUSINESS"} if c == "me" else ({"data": []} if c.endswith("content_publishing_limit") else f(m, c, tok, **p)))
+    assert P.main(["--verificar"], momento=m("2026-10-27")) == 0
+    assert not (tmp_path / "r.csv").exists()
+    assert not any(c[1].endswith("/media_publish") for c in f.chamadas)
