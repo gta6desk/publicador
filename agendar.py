@@ -97,13 +97,29 @@ def decisoes(mesa):
 
 def versao(mesa, pid):
     """Última gravação que mexeu no post ou no desenho (molde, fundos, marca): se mudar, os slides refazem-se."""
-    return git(mesa, "log", "-1", "--format=%H", "--", f"posts/{pid}", *DESENHO).strip()
+    extra = [os.path.relpath(f, mesa) for f in (slides_prontos(mesa, pid) or [])]
+    return git(mesa, "log", "-1", "--format=%H", "--", f"posts/{pid}", *DESENHO, *extra).strip()
 
 
 def ids_da_mesa(mesa):
     pasta = os.path.join(mesa, "posts")
     return sorted(d for d in os.listdir(pasta)
                   if re.match(r"\d{4}-\d{2}-\d{2}-", d) and os.path.isfile(os.path.join(pasta, d, "post.json")))
+
+
+def ler_post(mesa, pid):
+    with open(os.path.join(mesa, "posts", pid, "post.json"), encoding="utf-8") as f:
+        return json.load(f)
+
+
+def slides_prontos(mesa, pid):
+    """Posts já desenhados (ex.: os carrosséis do Rodri): "pronto" no post.json, com a lista de imagens
+    (caminhos relativos à pasta do post). Não passam pelo molde."""
+    pronto = ler_post(mesa, pid).get("pronto")
+    if not pronto:
+        return None
+    base = os.path.join(mesa, "posts", pid)
+    return [os.path.normpath(os.path.join(base, f)) for f in pronto]
 
 
 def estado(mesa, pid, publicados, decs):
@@ -118,6 +134,8 @@ def estado(mesa, pid, publicados, decs):
     t_post = ultima_mudanca(mesa, f"posts/{pid}")
     v = veredito_ibiki(mesa, pid)
     t_rev = ultima_mudanca(mesa, f"revisoes/{pid}.md")
+    if ler_post(mesa, pid).get("sem_ibiki"):  # decisão dos sócios: este post não passa pelo Ibiki (ex.: os do Rodri, 27/10)
+        v, t_rev = "passa", t_post
     aprovado = bool(ultima and ultima[1] == "aprovado" and t_post and ultima[0] >= t_post)
     apesar = aprovado and "apesar do ibiki" in ultima[2].lower()
     if v is None or not t_rev or t_rev < t_post:
@@ -160,11 +178,13 @@ def planear(fila, est, publicados, hoje, ordem=None):
 def gerar_jpeg(mesa, pid, destino_raiz=AQUI):
     from PIL import Image
     pasta = os.path.join(mesa, "posts", pid)
-    molde = os.path.join(mesa, "agentes", "jiraiya", "molde", "render.py")
-    r = subprocess.run([sys.executable, molde, os.path.abspath(pasta)], capture_output=True, text=True)
-    if r.returncode:
-        raise ErroAgendar(f"o molde falhou em {pid}: {(r.stdout + r.stderr).strip()[-300:]}")
-    pngs = sorted(f for f in os.listdir(os.path.join(pasta, "en")) if f.endswith(".png"))
+    pngs = slides_prontos(mesa, pid)
+    if pngs is None:
+        molde = os.path.join(mesa, "agentes", "jiraiya", "molde", "render.py")
+        r = subprocess.run([sys.executable, molde, os.path.abspath(pasta)], capture_output=True, text=True)
+        if r.returncode:
+            raise ErroAgendar(f"o molde falhou em {pid}: {(r.stdout + r.stderr).strip()[-300:]}")
+        pngs = [os.path.join(pasta, "en", f) for f in sorted(os.listdir(os.path.join(pasta, "en"))) if f.endswith(".png")]
     if not 2 <= len(pngs) <= 10:
         raise ErroAgendar(f"{pid}: {len(pngs)} slides (o Instagram aceita 2 a 10)")
     saida = os.path.join(destino_raiz, "posts", pid)
@@ -172,9 +192,11 @@ def gerar_jpeg(mesa, pid, destino_raiz=AQUI):
     os.makedirs(saida)
     ficheiros = []
     for n, f in enumerate(pngs, 1):
-        im = Image.open(os.path.join(pasta, "en", f)).convert("RGB")
+        if not os.path.isfile(f):
+            raise ErroAgendar(f"{pid}: falta a imagem {os.path.relpath(f, mesa)}")
+        im = Image.open(f).convert("RGB")
         if im.size != (1080, 1350):
-            raise ErroAgendar(f"{pid}/{f}: tamanho {im.size}, devia ser 1080x1350")
+            raise ErroAgendar(f"{pid}/{os.path.basename(f)}: tamanho {im.size}, devia ser 1080x1350")
         rel = f"posts/{pid}/{n:02d}.jpg"
         im.save(os.path.join(destino_raiz, rel), "JPEG", quality=92)
         ficheiros.append(rel)

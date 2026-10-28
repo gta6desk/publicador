@@ -164,3 +164,21 @@ def test_molde_novo_refaz_os_slides_dos_que_estao_por_sair(monkeypatch, tmp_path
     assert A.main(["--mesa", mesa.raiz], hoje=HOJE) == 0 and feitos == [pid]
     f = json.loads(fila.read_text())["fila"][0]
     assert f["data"] == "2026-10-30" and f["ficheiros"] == ["novo.jpg"] and f["versao"] == A.versao(mesa.raiz, pid)
+
+
+def test_posts_do_rodri_sem_ibiki_e_com_slides_prontos(tmp_path, mesa):
+    from PIL import Image
+    for k in (1, 2):
+        f = os.path.join(mesa.raiz, "posts", "RODRI", f"s{k}.jpg")
+        os.makedirs(os.path.dirname(f), exist_ok=True)
+        Image.new("RGB", (1080, 1350), (k * 50, 0, 0)).save(f)
+    pid = "2026-10-14-heat-x"
+    mesa.escrever(f"posts/{pid}/post.json", json.dumps({"id": pid, "sem_ibiki": True, "pronto": ["../RODRI/s1.jpg", "../RODRI/s2.jpg"],
+                                                       "en": {"caption": "x\\nImages: imagined"}}))
+    assert mesa.estados()[pid] == "por-aprovar"  # não espera pelo Ibiki
+    mesa.socio(pid, "aprovado")
+    assert mesa.estados()[pid] == "aprovado"
+    destino = tmp_path / "pub"
+    fs = A.gerar_jpeg(mesa.raiz, pid, destino_raiz=str(destino))
+    assert fs == [f"posts/{pid}/01.jpg", f"posts/{pid}/02.jpg"]
+    assert Image.open(destino / fs[1]).getpixel((5, 5))[0] > 80  # é a 2.ª imagem, pela ordem do post.json
