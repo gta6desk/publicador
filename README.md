@@ -1,6 +1,8 @@
 # Publicador da @gta6desk
 
-Publica no Instagram, pela **API oficial**, o que está em `fila.json` para cada dia. Corre sozinho no GitHub Actions às **13:07 de Lisboa** (2.ª tentativa às 13:22; vigia às 13:47 manda email se nada saiu). Não precisa do Mac ligado.
+Publica no Instagram, pela **API oficial**, o que está em `fila.json` para cada dia. Quem o dispara a horas é o **cron-job.org** (13:07 e 13:22 stories; 19:07 e 19:22 posts, hora de Lisboa); os agendamentos do GitHub ficam de reserva, e a vigia (13:47 e 19:47) manda email se nada saiu. Não precisa do Mac ligado.
+
+**Agendador (desde 28/10):** antes de publicar, `agendar.py` lê o repositório `mesa` (só leitura, segredo `MESA_TOKEN`) e acerta a fila: um post entra quando o Ibiki o passou e um sócio o aprovou em `vereditos.md` depois da última mudança; sai se deixar de estar assim. Vai para o primeiro dia livre a partir de amanhã, às 19:00. No máximo 8 mudanças por corrida. Se o agendador falhar, publica-se o que já estava na fila e o GitHub manda email.
 
 - `fila.json`: o que sai e quando (data, hora de Lisboa, ficheiro).
 - `stories/`: as stories (JPEG 1080x1920). `posts/`: os carrosséis (JPEG 1080x1350, legenda na fila). O repositório é público porque a API só aceita imagens num link público.

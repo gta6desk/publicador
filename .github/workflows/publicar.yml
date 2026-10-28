@@ -1,8 +1,9 @@
 name: publicar
 # Horas de Lisboa (= UTC de novembro a março; em horário de verão tirar 1 hora a cada cron).
-# O GitHub atrasa ou descarta agendamentos à hora certa (27/10 não correu). Por isso:
-# Stories: 13:07 publica, 13:22 2.ª tentativa, 13:47 vigia. Posts: 19:07, 19:22, vigia 19:47.
+# Quem dispara a horas é o cron-job.org (13:07, 13:22, 19:07, 19:22 de Lisboa, desde 28/10).
+# Os agendamentos abaixo ficam de reserva: o GitHub atrasa-os horas (27 e 28/10), mas acabam por correr.
 # O registo impede repetir; a vigia não publica, só dá erro (email) se o de hoje não saiu.
+# Antes de publicar, o agendador acerta a fila com a mesa (posts aprovados entram; os que deixaram de estar saem).
 on:
   schedule:
     - cron: "7 13 * * *"
@@ -23,7 +24,7 @@ on:
         default: false
 
 permissions:
-  contents: write   # para guardar o registo.csv
+  contents: write   # para guardar o registo.csv e a fila
 
 concurrency:
   group: publicar
@@ -32,25 +33,56 @@ concurrency:
 jobs:
   publicar:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
+    env:
+      VIGIA: ${{ github.event.schedule == '47 13 * * *' || github.event.schedule == '47 19 * * *' }}
+      VERIFICAR: ${{ github.event_name == 'workflow_dispatch' && inputs.verificar }}
+      SIMULAR: ${{ github.event_name == 'workflow_dispatch' && inputs.simular }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
       - run: pip install pytest pillow
+      - name: Agendador (mesa só de leitura → fila)
+        if: env.VIGIA != 'true' && env.VERIFICAR != 'true'
+        env:
+          MESA_TOKEN: ${{ secrets.MESA_TOKEN }}
+        run: |
+          if [ -z "$MESA_TOKEN" ]; then echo "Sem MESA_TOKEN: agendador desligado, a fila fica como está."; exit 0; fi
+          git clone -q "https://x-access-token:${MESA_TOKEN}@github.com/gta6desk/mesa" ../mesa
+          if [ "$SIMULAR" = "true" ]; then opc="--simular"; else opc=""; fi
+          if ! python agendar.py --mesa ../mesa $opc; then
+            echo "::warning::O agendador falhou: a fila fica como estava e publica-se o que já lá estava."
+            git checkout -- fila.json; git clean -fdq posts/
+            echo "AGENDAR_FALHOU=1" >> "$GITHUB_ENV"
+          fi
       - name: Testes (se falharem, não publica)
-        run: pytest -q
+        run: |
+          if ! pytest -q; then
+            if git diff --quiet -- fila.json; then exit 1; fi
+            echo "::warning::Os testes falharam com a fila nova do agendador; volto à fila anterior."
+            git checkout -- fila.json; git clean -fdq posts/
+            echo "AGENDAR_FALHOU=1" >> "$GITHUB_ENV"
+            pytest -q
+          fi
+      - name: Guardar fila
+        if: env.SIMULAR != 'true'
+        run: |
+          git config user.name "publicador-gta6desk"
+          git config user.email "actions@users.noreply.github.com"
+          git add fila.json posts/
+          git diff --cached --quiet || (git commit -m "fila: agendador $(date -u +%F' '%H:%M)" && git push)
       - name: Publicar
         env:
           IG_TOKEN: ${{ secrets.IG_TOKEN }}
           IG_USER_ID: ${{ secrets.IG_USER_ID }}
         run: |
-          if [ "${{ github.event.schedule }}" = "47 13 * * *" ] || [ "${{ github.event.schedule }}" = "47 19 * * *" ]; then
+          if [ "$VIGIA" = "true" ]; then
             python publicar.py --vigiar
-          elif [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.verificar }}" = "true" ]; then
+          elif [ "$VERIFICAR" = "true" ]; then
             python publicar.py --verificar
-          elif [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.simular }}" = "true" ]; then
+          elif [ "$SIMULAR" = "true" ]; then
             python publicar.py --simular
           else
             python publicar.py
@@ -62,3 +94,8 @@ jobs:
           git config user.email "actions@users.noreply.github.com"
           git add registo.csv
           git diff --cached --quiet || (git commit -m "registo: $(date -u +%F)" && git push)
+      - name: Avisar se o agendador falhou
+        if: env.AGENDAR_FALHOU == '1'
+        run: |
+          echo "O agendador falhou nesta corrida (ver o passo 'Agendador' ou 'Testes'). Publicou-se o que já estava na fila."
+          exit 1
