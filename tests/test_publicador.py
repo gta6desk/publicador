@@ -73,7 +73,8 @@ def test_posts_servem_para_carrossel(fila):
         leg = i["legenda"].strip()
         assert leg and len(leg) <= 2200, i["id"]
         assert leg.count("#") <= 30, i["id"]
-        assert "Rockstar" in leg, f"{i['id']}: falta o crédito na legenda (regra de 19/10)"
+        # regra de 19/10: imagens sempre com crédito (Rockstar ou a fonte real da imagem)
+        assert re.search(r"(Images?|Imagens?|Cover|Capa):|Rockstar", leg), f"{i['id']}: falta o crédito das imagens na legenda"
 
 
 def test_no_maximo_um_post_por_dia(fila):
