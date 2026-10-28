@@ -75,18 +75,19 @@
    "ficheiro": "stories/countdown/2026-10-30-20days.jpg"
   },
   {
-   "id": "2026-10-14-fugas-garbut",
+   "id": "2026-10-17-lei-torres",
    "data": "2026-10-30",
    "hora": "19:00",
    "tipo": "carrossel",
    "ficheiros": [
-    "posts/2026-10-14-fugas-garbut/01.jpg",
-    "posts/2026-10-14-fugas-garbut/02.jpg",
-    "posts/2026-10-14-fugas-garbut/03.jpg",
-    "posts/2026-10-14-fugas-garbut/04.jpg",
-    "posts/2026-10-14-fugas-garbut/05.jpg"
+    "posts/2026-10-17-lei-torres/01.jpg",
+    "posts/2026-10-17-lei-torres/02.jpg",
+    "posts/2026-10-17-lei-torres/03.jpg",
+    "posts/2026-10-17-lei-torres/04.jpg",
+    "posts/2026-10-17-lei-torres/05.jpg",
+    "posts/2026-10-17-lei-torres/06.jpg"
    ],
-   "legenda": "Rockstar's Aaron Garbut told Bloomberg the 2022 GTA 6 leaks were \"weirdly invasive\", like someone going through your dirty laundry. GTA 6 launches 19 November.\n\nSource: Bloomberg (read via GameSpot and Insider Gaming)\nImages: Rockstar Games\n#GTA6 #GTAVI #RockstarGames"
+   "legenda": "US Rep. Ritchie Torres says he will introduce the Power To The Players Act, so digital games you buy are yours and online games keep an offline mode. The bill has not been introduced yet. Kotaku links it to GTA 6 shipping as a code in a box.\n\nSource: Kotaku\nImages: Ritchie Torres, official portrait, House Creative Committee, public domain (Wikimedia Commons); GTA VI cover: Rockstar Games\n#GTA6 #GTAVI #GameOwnership"
   },
   {
    "id": "2026-10-31-19days",
@@ -96,18 +97,19 @@
    "ficheiro": "stories/countdown/2026-10-31-19days.jpg"
   },
   {
-   "id": "2026-10-14-gta-v-ps-plus",
+   "id": "2026-10-14-wynwood-walls",
    "data": "2026-10-31",
    "hora": "19:00",
    "tipo": "carrossel",
    "ficheiros": [
-    "posts/2026-10-14-gta-v-ps-plus/01.jpg",
-    "posts/2026-10-14-gta-v-ps-plus/02.jpg",
-    "posts/2026-10-14-gta-v-ps-plus/03.jpg",
-    "posts/2026-10-14-gta-v-ps-plus/04.jpg",
-    "posts/2026-10-14-gta-v-ps-plus/05.jpg"
+    "posts/2026-10-14-wynwood-walls/01.jpg",
+    "posts/2026-10-14-wynwood-walls/02.jpg",
+    "posts/2026-10-14-wynwood-walls/03.jpg",
+    "posts/2026-10-14-wynwood-walls/04.jpg",
+    "posts/2026-10-14-wynwood-walls/05.jpg",
+    "posts/2026-10-14-wynwood-walls/06.jpg"
    ],
-   "legenda": "Kotaku reports that Sony is telling PS Plus members GTA V leaves Extra and Premium on 17 November, two days before GTA 6. The message was shared on Reddit. After that, you need to buy the game to keep playing.\n\nSource: Kotaku, Notebookcheck, Rockstar Games\n#GTA6 #GTAV #PSPlus #PlayStation"
+   "legenda": "Wynwood Walls in Miami announced a partnership with Rockstar Games around GTA VI: free entry for Miami-Dade residents until 2028, new murals by artists featured in the game and The Art of Vice City collection, now on pre-order.\n\nSource: Wynwood Walls\nImages: Wynwood Walls photo by Phillip Pessar, CC BY 2.0 (Wikimedia Commons); The Art of Vice City: Rockstar Games and Wynwood Walls, via GTABoom; Rockstar Games\n#GTA6 #GTAVI #Miami #StreetArt"
   },
   {
    "id": "2026-11-01-18days",
@@ -117,8 +119,29 @@
    "ficheiro": "stories/countdown/2026-11-01-18days.jpg"
   },
   {
-   "id": "2026-10-14-proximo-jogo-hooker",
+   "id": "2026-10-17-game-awards",
    "data": "2026-11-01",
+   "hora": "19:00",
+   "tipo": "carrossel",
+   "ficheiros": [
+    "posts/2026-10-17-game-awards/01.jpg",
+    "posts/2026-10-17-game-awards/02.jpg",
+    "posts/2026-10-17-game-awards/03.jpg",
+    "posts/2026-10-17-game-awards/04.jpg",
+    "posts/2026-10-17-game-awards/05.jpg"
+   ],
+   "legenda": "To qualify this year, a game has to be on sale by 9 p.m. Pacific on 20 November, per The Game Awards FAQ. GTA 6 launches 19 November, one day before the cutoff. The show is on 10 December.\n\nSource: The Game Awards FAQ, Rockstar Games\nImages: Rockstar Games\n#GTA6 #GTAVI #TheGameAwards #GOTY"
+  },
+  {
+   "id": "2026-11-02-17days",
+   "data": "2026-11-02",
+   "hora": "13:00",
+   "tipo": "story",
+   "ficheiro": "stories/countdown/2026-11-02-17days.jpg"
+  },
+  {
+   "id": "2026-10-14-proximo-jogo-hooker",
+   "data": "2026-11-02",
    "hora": "19:00",
    "tipo": "carrossel",
    "ficheiros": [
@@ -132,15 +155,57 @@
    "legenda": "Phil Hooker, who heads development at Rockstar, told Bloomberg that what the studio built for GTA 6, from its engine and tools to its team, should help it \"do things more quickly\" next time. GTA 6 took more than eight years, and no next game has been announced.\n\nSource: Bloomberg (read via GameSpot, The Shortcut and IBTimes UK)\nImages: Rockstar Games\n#GTA6 #GTAVI #RockstarGames"
   },
   {
-   "id": "2026-11-02-17days",
-   "data": "2026-11-02",
+   "id": "2026-11-03-16days",
+   "data": "2026-11-03",
    "hora": "13:00",
    "tipo": "story",
-   "ficheiro": "stories/countdown/2026-11-02-17days.jpg"
+   "ficheiro": "stories/countdown/2026-11-03-16days.jpg"
+  },
+  {
+   "id": "2026-10-14-fugas-garbut",
+   "data": "2026-11-03",
+   "hora": "19:00",
+   "tipo": "carrossel",
+   "ficheiros": [
+    "posts/2026-10-14-fugas-garbut/01.jpg",
+    "posts/2026-10-14-fugas-garbut/02.jpg",
+    "posts/2026-10-14-fugas-garbut/03.jpg",
+    "posts/2026-10-14-fugas-garbut/04.jpg",
+    "posts/2026-10-14-fugas-garbut/05.jpg"
+   ],
+   "legenda": "Rockstar's Aaron Garbut told Bloomberg the 2022 GTA 6 leaks were \"weirdly invasive\", like someone going through your dirty laundry. GTA 6 launches 19 November.\n\nSource: Bloomberg (read via GameSpot and Insider Gaming)\nImages: Rockstar Games\n#GTA6 #GTAVI #RockstarGames"
+  },
+  {
+   "id": "2026-11-04-15days",
+   "data": "2026-11-04",
+   "hora": "13:00",
+   "tipo": "story",
+   "ficheiro": "stories/countdown/2026-11-04-15days.jpg"
+  },
+  {
+   "id": "2026-10-14-gta-v-ps-plus",
+   "data": "2026-11-04",
+   "hora": "19:00",
+   "tipo": "carrossel",
+   "ficheiros": [
+    "posts/2026-10-14-gta-v-ps-plus/01.jpg",
+    "posts/2026-10-14-gta-v-ps-plus/02.jpg",
+    "posts/2026-10-14-gta-v-ps-plus/03.jpg",
+    "posts/2026-10-14-gta-v-ps-plus/04.jpg",
+    "posts/2026-10-14-gta-v-ps-plus/05.jpg"
+   ],
+   "legenda": "Kotaku reports that Sony is telling PS Plus members GTA V leaves Extra and Premium on 17 November, two days before GTA 6. The message was shared on Reddit. After that, you need to buy the game to keep playing.\n\nSource: Kotaku, Notebookcheck, Rockstar Games\nImages: Rockstar Games\n#GTA6 #GTAV #PSPlus #PlayStation"
+  },
+  {
+   "id": "2026-11-05-14days",
+   "data": "2026-11-05",
+   "hora": "13:00",
+   "tipo": "story",
+   "ficheiro": "stories/countdown/2026-11-05-14days.jpg"
   },
   {
    "id": "2026-10-19-classificacoes-idade",
-   "data": "2026-11-02",
+   "data": "2026-11-05",
    "hora": "19:00",
    "tipo": "carrossel",
    "ficheiros": [
@@ -151,18 +216,18 @@
     "posts/2026-10-19-classificacoes-idade/05.jpg",
     "posts/2026-10-19-classificacoes-idade/06.jpg"
    ],
-   "legenda": "Rumor: GTABoom reports GTA 6 is now rated 17+ or older in every major market. South Korea's rating board gave it 19+ on 16 October, per GamerSky, and Japan's rating is CERO Z, 18 and over, per hashout.jp. Store pages in Saudi Arabia and the UAE show 21+.\n\nSource: GTABoom, GamerSky, Inven Global, hashout.jp, ESRB, USK\nImages: Rockstar Games\n#GTA6 #GTAVI #RockstarGames"
+   "legenda": "Rumor: GTABoom reports GTA 6 is now rated 17+ or older in every major market. South Korea's rating board gave it 19+ on 16 October, per GamerSky, and Japan's rating is CERO Z, 18 and over, per hashout.jp. Store pages in Saudi Arabia and the UAE show 21+.\n\nSource: GTABoom, GamerSky, Inven Global, hashout.jp, Notebookcheck, ESRB, USK\nImages: rating badges, public domain (Wikimedia Commons)\n#GTA6 #GTAVI #RockstarGames"
   },
   {
-   "id": "2026-11-03-16days",
-   "data": "2026-11-03",
+   "id": "2026-11-06-13days",
+   "data": "2026-11-06",
    "hora": "13:00",
    "tipo": "story",
-   "ficheiro": "stories/countdown/2026-11-03-16days.jpg"
+   "ficheiro": "stories/countdown/2026-11-06-13days.jpg"
   },
   {
    "id": "2026-10-20-daft-punk",
-   "data": "2026-11-03",
+   "data": "2026-11-06",
    "hora": "19:00",
    "tipo": "carrossel",
    "ficheiros": [
@@ -174,18 +239,18 @@
     "posts/2026-10-20-daft-punk/06.jpg",
     "posts/2026-10-20-daft-punk/07.jpg"
    ],
-   "legenda": "Rumor: the X account hasitleaked says Rockstar approached Daft Punk's management for a \"final comeback\" on GTA 6, with \"essentially an unlimited budget\", and that Justice were the \"second choice\". Neither Rockstar nor Daft Punk's representatives have confirmed it. Justice composed the game's original score.\n\nSource: hasitleaked on X (read via GTABoom and Dexerto), Kotaku\nImages: Rockstar Games\n#GTA6 #GTAVI #DaftPunk #Justice"
+   "legenda": "Rumor: the X account hasitleaked says Rockstar approached Daft Punk's management for a \"final comeback\" on GTA 6, with \"essentially an unlimited budget\", and that Justice were the \"second choice\". Neither Rockstar nor Daft Punk's representatives have confirmed it. Justice composed the game's original score.\n\nSource: hasitleaked on X (read via GTABoom and Dexerto), Kotaku, CBS News\nImages: Rockstar Games; Daft Punk logo, public domain (Wikimedia Commons)\n#GTA6 #GTAVI #DaftPunk #Justice"
   },
   {
-   "id": "2026-11-04-15days",
-   "data": "2026-11-04",
+   "id": "2026-11-07-12days",
+   "data": "2026-11-07",
    "hora": "13:00",
    "tipo": "story",
-   "ficheiro": "stories/countdown/2026-11-04-15days.jpg"
+   "ficheiro": "stories/countdown/2026-11-07-12days.jpg"
   },
   {
    "id": "2026-10-20-nem-a-rockstar-sabe",
-   "data": "2026-11-04",
+   "data": "2026-11-07",
    "hora": "19:00",
    "tipo": "carrossel",
    "ficheiros": [
@@ -196,28 +261,7 @@
     "posts/2026-10-20-nem-a-rockstar-sabe/05.jpg",
     "posts/2026-10-20-nem-a-rockstar-sabe/06.jpg"
    ],
-   "legenda": "In a new video, Bloomberg's Jason Schreier shared details that did not fit in his GTA 6 report. Rockstar art director Aaron Garbut: \"There's no one person that has this whole thing in their head.\" Some details, like Red Dead 2's weather-reactive horses, were one person's idea.\n\nSource: Jason Schreier on YouTube (read via GamesRadar and GTABoom)\nImages: Rockstar Games\n#GTA6 #GTAVI #Rockstar #RDR2"
-  },
-  {
-   "id": "2026-11-05-14days",
-   "data": "2026-11-05",
-   "hora": "13:00",
-   "tipo": "story",
-   "ficheiro": "stories/countdown/2026-11-05-14days.jpg"
-  },
-  {
-   "id": "2026-11-06-13days",
-   "data": "2026-11-06",
-   "hora": "13:00",
-   "tipo": "story",
-   "ficheiro": "stories/countdown/2026-11-06-13days.jpg"
-  },
-  {
-   "id": "2026-11-07-12days",
-   "data": "2026-11-07",
-   "hora": "13:00",
-   "tipo": "story",
-   "ficheiro": "stories/countdown/2026-11-07-12days.jpg"
+   "legenda": "In a new video, Bloomberg's Jason Schreier shared details that did not fit in his GTA 6 report. Rockstar art director Aaron Garbut: \"There's no one person that has this whole thing in their head.\" Some details, like Red Dead 2's weather-reactive horses, were one or more people's idea.\n\nSource: Jason Schreier on YouTube (read via GamesRadar and GTABoom)\nImages: Rockstar Games (GTA VI and Red Dead Redemption 2)\n#GTA6 #GTAVI #Rockstar #RDR2"
   },
   {
    "id": "2026-11-08-11days",
@@ -227,11 +271,41 @@
    "ficheiro": "stories/countdown/2026-11-08-11days.jpg"
   },
   {
+   "id": "2026-10-22-anuncios-brejeiros",
+   "data": "2026-11-08",
+   "hora": "19:00",
+   "tipo": "carrossel",
+   "ficheiros": [
+    "posts/2026-10-22-anuncios-brejeiros/01.jpg",
+    "posts/2026-10-22-anuncios-brejeiros/02.jpg",
+    "posts/2026-10-22-anuncios-brejeiros/03.jpg",
+    "posts/2026-10-22-anuncios-brejeiros/04.jpg",
+    "posts/2026-10-22-anuncios-brejeiros/05.jpg",
+    "posts/2026-10-22-anuncios-brejeiros/06.jpg"
+   ],
+   "legenda": "According to Miami creator Joel Franco, digital kiosks in Wynwood are showing ads for fictional GTA brands with crude slogans, like Pfister's \"Go Topless\" and Kronos' \"Always Come Early\". He shared the photos on X.\n\nSource: Joel Franco on X (read via GTABoom, Creapills and Insider Gaming)\nImages: Joel Franco (@OfficialJoelF) via GTABoom\n#GTA6 #GTAVI #Miami #ViceCity #Wynwood"
+  },
+  {
    "id": "2026-11-09-10days",
    "data": "2026-11-09",
    "hora": "13:00",
    "tipo": "story",
    "ficheiro": "stories/countdown/2026-11-09-10days.jpg"
+  },
+  {
+   "id": "2026-10-22-burger-shot",
+   "data": "2026-11-09",
+   "hora": "19:00",
+   "tipo": "carrossel",
+   "ficheiros": [
+    "posts/2026-10-22-burger-shot/01.jpg",
+    "posts/2026-10-22-burger-shot/02.jpg",
+    "posts/2026-10-22-burger-shot/03.jpg",
+    "posts/2026-10-22-burger-shot/04.jpg",
+    "posts/2026-10-22-burger-shot/05.jpg",
+    "posts/2026-10-22-burger-shot/06.jpg"
+   ],
+   "legenda": "According to VGC and Dexerto, Burger Shot and Cluckin' Bell have opened inside the Kaseya Center, the Miami Heat's arena. Staff wear branded uniforms, and Burger Shot took the place of a Skinny Louie's stand.\n\nSource: VGC, Dexerto\nImages: Burger Shot photo X/nvtnp via Dexerto; Kaseya Center photo by Phillip Pessar, CC BY 2.0 (Wikimedia Commons)\n#GTA6 #GTAVI #BurgerShot #Miami #ViceCity"
   },
   {
    "id": "2026-11-10-9days",
@@ -241,6 +315,20 @@
    "ficheiro": "stories/countdown/2026-11-10-9days.jpg"
   },
   {
+   "id": "2026-10-27-embargo-criticas",
+   "data": "2026-11-10",
+   "hora": "19:00",
+   "tipo": "carrossel",
+   "ficheiros": [
+    "posts/2026-10-27-embargo-criticas/01.jpg",
+    "posts/2026-10-27-embargo-criticas/02.jpg",
+    "posts/2026-10-27-embargo-criticas/03.jpg",
+    "posts/2026-10-27-embargo-criticas/04.jpg",
+    "posts/2026-10-27-embargo-criticas/05.jpg"
+   ],
+   "legenda": "Rumor: leaker Nate the Hate says Rockstar has started sending GTA 6 review copies to the media, with a review embargo on 18 November. Gameranx has no statement from Rockstar or Take-Two.\n\nSource: Nate the Hate on X (read via Insider Gaming and Gameranx)\nImages: Rockstar Games\n#GTA6 #GTAVI #RockstarGames"
+  },
+  {
    "id": "2026-11-11-8days",
    "data": "2026-11-11",
    "hora": "13:00",
@@ -248,11 +336,42 @@
    "ficheiro": "stories/countdown/2026-11-11-8days.jpg"
   },
   {
+   "id": "2026-10-19-caixas-piratas",
+   "data": "2026-11-11",
+   "hora": "19:00",
+   "tipo": "carrossel",
+   "ficheiros": [
+    "posts/2026-10-19-caixas-piratas/01.jpg",
+    "posts/2026-10-19-caixas-piratas/02.jpg",
+    "posts/2026-10-19-caixas-piratas/03.jpg",
+    "posts/2026-10-19-caixas-piratas/04.jpg",
+    "posts/2026-10-19-caixas-piratas/05.jpg",
+    "posts/2026-10-19-caixas-piratas/06.jpg"
+   ],
+   "legenda": "Rumor: an ad shared on X by the GTA 6 Info account, reported by Notebookcheck and iXBT, shows Chinese sellers offering unofficial GTA 6 PS5 disc editions, Standard and Ultimate. GTABoom reports the same sets. Notebookcheck and GTABoom say the disc does not play on any console. Rockstar's own physical version is a download code, with no disc.\n\nSource: GTA 6 Info on X (read via Notebookcheck and iXBT), GTABoom, Rockstar Games Support\nImages: seller's ad, GTA 6 Info on X via Notebookcheck; GTA VI cover: Rockstar Games\n#GTA6 #GTAVI #PS5"
+  },
+  {
    "id": "2026-11-12-7days",
    "data": "2026-11-12",
    "hora": "13:00",
    "tipo": "story",
    "ficheiro": "stories/countdown/2026-11-12-7days.jpg"
+  },
+  {
+   "id": "2026-10-19-caravana-miami",
+   "data": "2026-11-12",
+   "hora": "19:00",
+   "tipo": "carrossel",
+   "ficheiros": [
+    "posts/2026-10-19-caravana-miami/01.jpg",
+    "posts/2026-10-19-caravana-miami/02.jpg",
+    "posts/2026-10-19-caravana-miami/03.jpg",
+    "posts/2026-10-19-caravana-miami/04.jpg",
+    "posts/2026-10-19-caravana-miami/05.jpg",
+    "posts/2026-10-19-caravana-miami/06.jpg",
+    "posts/2026-10-19-caravana-miami/07.jpg"
+   ],
+   "legenda": "According to Notebookcheck and Men's Journal, real cars made up as GTA 6 vehicles drove together around Miami, with Leonida plates and a Lamborghini in the game's police colors. The images were shared on X by Only in Dade. Until 17 October, Rockstar had not confirmed or commented, per GTABoom.\n\nSource: Only in Dade on X (read via Notebookcheck and GTABoom), Men's Journal, GTABoom\nImages: Leonida plate photo, Andrew Blake Ames via GTABoom; Vice Beach police and Grotti Cheetah, Rockstar Games; Goodyear blimp photo by Eileen dover019, CC0 (Wikimedia Commons)\n#GTA6 #GTAVI #Miami #ViceCity"
   },
   {
    "id": "2026-11-13-6days",
