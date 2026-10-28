@@ -18,7 +18,8 @@ Regras fixas:
 - tira da fila os posts ainda por publicar que já não estão "aprovado" (nunca os publicados);
 - põe cada aprovado novo no primeiro dia livre a partir de amanhã, às 19:00 (no máximo 1 post por dia);
 - no máximo MAX_MUDANCAS por corrida; acima disso pára sem mudar nada (o GitHub avisa por email);
-- a imagem é a da versão aprovada: gera os slides com o molde da mesa e converte-os para JPEG.
+- a imagem é a da versão aprovada: gera os slides com o molde da mesa e converte-os para JPEG;
+- se o molde, os fundos ou a marca mudarem, refaz os slides dos posts que ainda estão por sair (mesma data).
 """
 import argparse, csv, datetime as dt, json, os, re, shutil, subprocess, sys
 
@@ -27,6 +28,8 @@ import publicar as P
 AQUI = os.path.dirname(os.path.abspath(__file__))
 HORA_POST = "19:00"
 MAX_MUDANCAS = 8
+MAX_REFEITOS = 20
+DESENHO = ["agentes/jiraiya/molde", "cenarios", "marca"]  # o que muda o aspeto dos slides além do próprio post
 VEREDITO_IBIKI = re.compile(r"veredito:?\W*(passa com notas|passa|precisa de trabalho)", re.I)
 CREDITO = re.compile(r"(Images?|Imagens?|Cover|Capa):|Rockstar")
 
@@ -90,6 +93,11 @@ def decisoes(mesa):
         if tipo:
             out.setdefault(partes[1], []).append((hora, tipo, partes[2]))
     return out
+
+
+def versao(mesa, pid):
+    """Última gravação que mexeu no post ou no desenho (molde, fundos, marca): se mudar, os slides refazem-se."""
+    return git(mesa, "log", "-1", "--format=%H", "--", f"posts/{pid}", *DESENHO).strip()
 
 
 def ids_da_mesa(mesa):
@@ -202,9 +210,18 @@ def main(argv=None, hoje=None):
     print("Estado dos posts da mesa:")
     for pid, e in sorted(est.items()):
         print(f"  {e:12} {pid}")
-    if not tirados and not novos:
+    try:
+        refazer = [i for i in nova if i["tipo"] == "carrossel" and i["id"] not in publicados
+                   and i["data"] >= hoje.isoformat() and est.get(i["id"]) == "aprovado"
+                   and i.get("versao") != versao(a.mesa, i["id"])]
+    except ErroAgendar as e:
+        print(f"ERRO: {e}")
+        return 1
+    if not tirados and not novos and not refazer:
         print("Agendador: nada a mudar na fila.")
         return 0
+    for i in refazer:
+        print(f"REFAZ os slides: {i['id']} (a {i['data']}; o molde, os fundos ou a marca mudaram)")
     for pid in tirados:
         print(f"TIRA da fila: {pid} (estado: {est.get(pid, 'não existe na mesa')})")
     for pid, data in novos:
@@ -212,13 +229,19 @@ def main(argv=None, hoje=None):
     if len(tirados) + len(novos) > MAX_MUDANCAS:
         print(f"ERRO: {len(tirados) + len(novos)} mudanças numa corrida (máximo {MAX_MUDANCAS}). Parei sem mudar nada.")
         return 1
+    if len(refazer) > MAX_REFEITOS:
+        print(f"ERRO: {len(refazer)} posts para refazer (máximo {MAX_REFEITOS}). Parei sem mudar nada.")
+        return 1
     if a.simular:
         print("[simulação] nada gravado.")
         return 0
     try:
+        for i in refazer:
+            i.update(ficheiros=gerar_jpeg(a.mesa, i["id"]), legenda=legenda(a.mesa, i["id"]), versao=versao(a.mesa, i["id"]))
         for pid, data in novos:
             nova.append({"id": pid, "data": data, "hora": HORA_POST, "tipo": "carrossel",
-                         "ficheiros": gerar_jpeg(a.mesa, pid), "legenda": legenda(a.mesa, pid)})
+                         "ficheiros": gerar_jpeg(a.mesa, pid), "legenda": legenda(a.mesa, pid),
+                         "versao": versao(a.mesa, pid)})
     except ErroAgendar as e:
         print(f"ERRO: {e}. Parei sem mudar a fila.")
         return 1
@@ -226,7 +249,7 @@ def main(argv=None, hoje=None):
     fila_toda["fila"] = nova
     with open(P.FILA, "w", encoding="utf-8") as f:
         json.dump(fila_toda, f, ensure_ascii=False, indent=1)
-    print(f"Fila gravada: {len(tirados)} tirados, {len(novos)} novos.")
+    print(f"Fila gravada: {len(tirados)} tirados, {len(novos)} novos, {len(refazer)} refeitos.")
     return 0
 
 

@@ -145,3 +145,22 @@ def test_limite_de_mudancas_para_tudo(monkeypatch, tmp_path, mesa):
     monkeypatch.setattr(A.P, "REGISTO", str(tmp_path / "registo.csv"))
     assert A.main(["--mesa", mesa.raiz], hoje=HOJE) == 1
     assert json.loads(fila.read_text())["fila"] == []  # nada mudou
+
+
+def test_molde_novo_refaz_os_slides_dos_que_estao_por_sair(monkeypatch, tmp_path, mesa):
+    pid = "2026-10-28-a"
+    mesa.post(pid); mesa.ibiki(pid, "passa"); mesa.socio(pid, "aprovado")
+    v1 = A.versao(mesa.raiz, pid)
+    fila = tmp_path / "fila.json"
+    item = {"id": pid, "data": "2026-10-30", "hora": "19:00", "tipo": "carrossel", "ficheiros": ["x"], "legenda": "x", "versao": v1}
+    fila.write_text(json.dumps({"_nota": "", "fila": [item]}))
+    monkeypatch.setattr(A.P, "FILA", str(fila))
+    monkeypatch.setattr(A.P, "REGISTO", str(tmp_path / "registo.csv"))
+    feitos = []
+    monkeypatch.setattr(A, "gerar_jpeg", lambda m, p: feitos.append(p) or ["novo.jpg"])
+    monkeypatch.setattr(A, "legenda", lambda m, p: "legenda nova")
+    assert A.main(["--mesa", mesa.raiz], hoje=HOJE) == 0 and feitos == []  # nada mudou: não refaz
+    mesa.escrever("agentes/jiraiya/molde/render.py", "# molde novo")
+    assert A.main(["--mesa", mesa.raiz], hoje=HOJE) == 0 and feitos == [pid]
+    f = json.loads(fila.read_text())["fila"][0]
+    assert f["data"] == "2026-10-30" and f["ficheiros"] == ["novo.jpg"] and f["versao"] == A.versao(mesa.raiz, pid)
