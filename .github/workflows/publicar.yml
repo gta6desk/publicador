@@ -1,6 +1,7 @@
 name: publicar
 # Horas de Lisboa (= UTC de novembro a março; em horário de verão tirar 1 hora a cada cron).
-# Quem dispara a horas é o cron-job.org (13:07, 13:22, 19:07, 19:22 de Lisboa, desde 28/10).
+# Quem dispara a horas é o cron-job.org (13:07, 13:22 stories; 17:07, 17:22, 23:37, 23:52 posts; Lisboa, desde 29/10).
+# 2 posts por dia (17:00 e 23:30 na fila) desde 29/10: pedido do Rodri, ok do João.
 # Os agendamentos abaixo ficam de reserva: o GitHub atrasa-os horas (27 e 28/10), mas acabam por correr.
 # O registo impede repetir; a vigia não publica, só dá erro (email) se o de hoje não saiu.
 # Antes de publicar, o agendador acerta a fila com a mesa (posts aprovados entram; os que deixaram de estar saem).
@@ -9,9 +10,11 @@ on:
     - cron: "7 13 * * *"
     - cron: "22 13 * * *"
     - cron: "47 13 * * *"
-    - cron: "7 19 * * *"
-    - cron: "22 19 * * *"
-    - cron: "47 19 * * *"
+    - cron: "7 17 * * *"
+    - cron: "22 17 * * *"
+    - cron: "47 17 * * *"
+    - cron: "37 23 * * *"
+    - cron: "52 23 * * *"
   workflow_dispatch:
     inputs:
       simular:
@@ -35,7 +38,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     env:
-      VIGIA: ${{ github.event.schedule == '47 13 * * *' || github.event.schedule == '47 19 * * *' }}
+      VIGIA: ${{ github.event.schedule == '47 13 * * *' || github.event.schedule == '47 17 * * *' }}
       VERIFICAR: ${{ github.event_name == 'workflow_dispatch' && inputs.verificar }}
       SIMULAR: ${{ github.event_name == 'workflow_dispatch' && inputs.simular }}
     steps:

@@ -16,7 +16,8 @@ Estado de cada post (código, não IA; a verdade está nos ficheiros da mesa):
 Regras fixas:
 - só mexe em carrosséis; as stories ficam como estão;
 - tira da fila os posts ainda por publicar que já não estão "aprovado" (nunca os publicados);
-- põe cada aprovado novo no primeiro dia livre a partir de amanhã, às 19:00 (no máximo 1 post por dia);
+- põe cada aprovado novo na primeira vaga livre a partir de amanhã: 2 por dia, às 17:00 e 23:30 de Lisboa
+  (12:00 e 18:30 na costa leste dos EUA; o cron-job.org dispara às 17:07 e 23:37);
 - no máximo MAX_MUDANCAS por corrida; acima disso pára sem mudar nada (o GitHub avisa por email);
 - a imagem é a da versão aprovada: gera os slides com o molde da mesa e converte-os para JPEG;
 - se o molde, os fundos ou a marca mudarem, refaz os slides dos posts que ainda estão por sair (mesma data).
@@ -26,7 +27,7 @@ import argparse, csv, datetime as dt, json, os, re, shutil, subprocess, sys
 import publicar as P
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
-HORA_POST = "19:00"
+HORAS_POST = ["17:00", "23:30"]  # vagas de carrossel por dia (pedido do Rodri, ok do João, 29/10)
 MAX_MUDANCAS = 8
 MAX_REFEITOS = 20
 DESENHO = ["agentes/jiraiya/molde", "cenarios", "marca"]  # o que muda o aspeto dos slides além do próprio post
@@ -157,20 +158,22 @@ def hora_aprovacao(mesa, pid):
 
 # ---------- planear ----------
 def planear(fila, est, publicados, hoje, ordem=None):
-    """Devolve (nova fila, tirados, novos[(pid, data)]). Não toca em stories nem em publicados."""
+    """Devolve (nova fila, tirados, novos[(pid, data, hora)]). Não toca em stories nem em publicados."""
     tirados = [i["id"] for i in fila if i["tipo"] == "carrossel" and i["id"] not in publicados
                and i["data"] >= hoje.isoformat() and est.get(i["id"]) != "aprovado"]
     nova = [i for i in fila if i["id"] not in tirados]
     na_fila = {i["id"] for i in nova}
-    ocupados = {i["data"] for i in nova if i["tipo"] == "carrossel"}
+    ocupados = {(i["data"], i["hora"]) for i in nova if i["tipo"] == "carrossel"}
     candidatos = [p for p, e in est.items() if e == "aprovado" and p not in na_fila and p not in publicados]
     candidatos.sort(key=ordem or (lambda p: p))
-    novos, dia = [], hoje + dt.timedelta(days=1)
+    novos, dia, k = [], hoje + dt.timedelta(days=1), 0
     for pid in candidatos:
-        while dia.isoformat() in ocupados:
-            dia += dt.timedelta(days=1)
-        novos.append((pid, dia.isoformat()))
-        ocupados.add(dia.isoformat())
+        while (dia.isoformat(), HORAS_POST[k]) in ocupados:
+            k += 1
+            if k == len(HORAS_POST):
+                k, dia = 0, dia + dt.timedelta(days=1)
+        novos.append((pid, dia.isoformat(), HORAS_POST[k]))
+        ocupados.add((dia.isoformat(), HORAS_POST[k]))
     return nova, tirados, novos
 
 
@@ -246,8 +249,8 @@ def main(argv=None, hoje=None):
         print(f"REFAZ os slides: {i['id']} (a {i['data']}; o molde, os fundos ou a marca mudaram)")
     for pid in tirados:
         print(f"TIRA da fila: {pid} (estado: {est.get(pid, 'não existe na mesa')})")
-    for pid, data in novos:
-        print(f"PÕE na fila: {pid} a {data} às {HORA_POST}")
+    for pid, data, hora in novos:
+        print(f"PÕE na fila: {pid} a {data} às {hora}")
     if len(tirados) + len(novos) > MAX_MUDANCAS:
         print(f"ERRO: {len(tirados) + len(novos)} mudanças numa corrida (máximo {MAX_MUDANCAS}). Parei sem mudar nada.")
         return 1
@@ -260,8 +263,8 @@ def main(argv=None, hoje=None):
     try:
         for i in refazer:
             i.update(ficheiros=gerar_jpeg(a.mesa, i["id"]), legenda=legenda(a.mesa, i["id"]), versao=versao(a.mesa, i["id"]))
-        for pid, data in novos:
-            nova.append({"id": pid, "data": data, "hora": HORA_POST, "tipo": "carrossel",
+        for pid, data, hora in novos:
+            nova.append({"id": pid, "data": data, "hora": hora, "tipo": "carrossel",
                          "ficheiros": gerar_jpeg(a.mesa, pid), "legenda": legenda(a.mesa, pid),
                          "versao": versao(a.mesa, pid)})
     except ErroAgendar as e:

@@ -95,8 +95,8 @@ def test_linhas_que_nao_sao_estado_nao_contam(mesa):
 
 
 # ---------- planear a fila ----------
-def car(pid, data):
-    return {"id": pid, "data": data, "hora": "19:00", "tipo": "carrossel", "ficheiros": [], "legenda": "x"}
+def car(pid, data, hora="17:00"):
+    return {"id": pid, "data": data, "hora": hora, "tipo": "carrossel", "ficheiros": [], "legenda": "x"}
 
 
 def sto(pid, data):
@@ -116,23 +116,32 @@ def test_post_que_desapareceu_da_mesa_sai_da_fila():
     assert tirados == ["sumiu"]
 
 
-def test_novos_vao_para_o_primeiro_dia_livre_a_partir_de_amanha():
-    fila = [car("a", "2026-10-29"), car("b", "2026-10-31")]
-    est = {"a": "aprovado", "b": "aprovado", "n1": "aprovado", "n2": "aprovado", "x": "por-aprovar"}
+def test_novos_vao_para_a_primeira_vaga_livre_a_partir_de_amanha():
+    fila = [car("a", "2026-10-29"), car("b", "2026-10-31", "17:00"), car("c", "2026-10-31", "23:30")]
+    est = {"a": "aprovado", "b": "aprovado", "c": "aprovado", "n1": "aprovado", "n2": "aprovado",
+           "n3": "aprovado", "x": "por-aprovar"}
     _, tirados, novos = A.planear(fila, est, set(), HOJE)
-    assert tirados == [] and novos == [("n1", "2026-10-30"), ("n2", "2026-11-01")]
+    assert tirados == [] and novos == [("n1", "2026-10-29", "23:30"), ("n2", "2026-10-30", "17:00"),
+                                       ("n3", "2026-10-30", "23:30")]
+
+
+def test_dois_por_dia_e_vaga_da_noite_livre_e_usada():
+    fila = [car("b", "2026-10-30", "17:00")]
+    _, _, novos = A.planear(fila, {"b": "aprovado", "n": "aprovado"}, set(), dt.date(2026, 10, 29))
+    assert novos == [("n", "2026-10-30", "23:30")]
 
 
 def test_nunca_agenda_para_hoje_nem_para_tras():
     _, _, novos = A.planear([], {"n": "aprovado"}, set(), HOJE)
-    assert novos == [("n", "2026-10-29")]
+    assert novos == [("n", "2026-10-29", "17:00")]
 
 
 def test_buraco_deixado_por_um_tirado_e_preenchido():
-    fila = [car("a", "2026-10-29"), car("mau", "2026-10-30"), car("b", "2026-10-31")]
-    est = {"a": "aprovado", "mau": "trabalho", "b": "aprovado", "n": "aprovado"}
+    fila = [car("a", "2026-10-29"), car("a2", "2026-10-29", "23:30"), car("mau", "2026-10-30"),
+            car("b", "2026-10-30", "23:30")]
+    est = {"a": "aprovado", "a2": "aprovado", "mau": "trabalho", "b": "aprovado", "n": "aprovado"}
     _, tirados, novos = A.planear(fila, est, set(), HOJE)
-    assert tirados == ["mau"] and novos == [("n", "2026-10-30")]
+    assert tirados == ["mau"] and novos == [("n", "2026-10-30", "17:00")]
 
 
 def test_limite_de_mudancas_para_tudo(monkeypatch, tmp_path, mesa):

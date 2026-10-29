@@ -77,9 +77,11 @@ def test_posts_servem_para_carrossel(fila):
         assert re.search(r"(Images?|Imagens?|Cover|Capa):|Rockstar", leg), f"{i['id']}: falta o crédito das imagens na legenda"
 
 
-def test_no_maximo_um_post_por_dia(fila):
-    dias = [i["data"] for i in fila if i["tipo"] == "carrossel"]
-    assert len(dias) == len(set(dias))
+def test_no_maximo_dois_posts_por_dia_e_nunca_dois_a_mesma_hora(fila):
+    import collections
+    vagas = [(i["data"], i["hora"]) for i in fila if i["tipo"] == "carrossel"]
+    assert len(vagas) == len(set(vagas))
+    assert max(collections.Counter(d for d, _ in vagas).values()) <= 2
 
 
 def test_tipos_conhecidos(fila):
